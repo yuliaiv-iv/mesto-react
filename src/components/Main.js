@@ -2,7 +2,6 @@ import React from 'react';
 import { api } from '../utils/Api.js';
 import Card from './Card.js';
 
-
 function Main(props) {
     const [userAvatar, setUserAvatar] = React.useState();
     const [userName, setUserName] = React.useState();
@@ -20,6 +19,7 @@ function Main(props) {
                 console.log(err);
             });
     })
+
     React.useEffect(() => {
         api.getInitialCards()
             .then((item) => {
@@ -32,40 +32,48 @@ function Main(props) {
 
     return (
         <main className="content">
-        <section className="profile">
-            <dev className="profile__avatar">
-                <img className="profile__image" style={ { backgroundImage: `url(${userAvatar})` }}
-                    alt="Фотография профиля" 
+            <section className="profile">
+                <dev className="profile__avatar">
+                    <img
+                        className="profile__image"
+                        src={userAvatar}
+                        alt="Фотография профиля"
                     />
-                <div className="profile__cover">
-                    <button onClick={props.onEditAvatar}
+                    <div className="profile__cover">
+                        <button
+                            onClick={props.onEditAvatar}
+                            type="button"
+                            className="button profile__button-avatar"
+                            aria-label="обновить фотографию пользователя">
+                        </button>
+                    </div>
+                </dev>
+                <div className="profile__info">
+                    <h1 className="profile__name">{userName}</h1>
+                    <button
+                        onClick={props.onEditProfile}
                         type="button"
-                        className="button profile__button-avatar" 
-                        aria-label="обновить фотографию пользователя">
+                        aria-label="обновить информацию пользователя"
+                        className="button profile__button-edit opacity">
                     </button>
+                    <p className="profile__about">{userDescription}</p>
                 </div>
-            </dev>
-            <div className="profile__info">
-                <h1 className="profile__name">{userName}</h1>
-                <button onClick={props.onEditProfile}
-                    type="button" 
-                    aria-label="обновить информацию пользователя" 
-                    className="button profile__button-edit opacity">
+                <button
+                    onClick={props.onAddPlace}
+                    type="button"
+                    aria-label="добавить новую карточку"
+                    className="button profile__button-add opacity">
                 </button>
-                <p className="profile__about">{userDescription}</p>
-            </div>
-            <button onClick={props.onAddPlace}
-                type="button" 
-                aria-label="добавить новую карточку" 
-                className="button profile__button-add opacity">
-            </button>
-        </section>
-        <section className="card-container">
-            <ul className="card-container__list">
-                {cards.map(card => <Card {...card}/>)}
-            </ul>
-        </section>
-    </main>
+            </section>
+            <section className="card-container">
+                <ul className="card-container__list">
+                    {cards.map(card => <Card {...card}
+                        onCardClick={props.onCardClick}
+                        key={card._id}
+                        card={card} />)}
+                </ul>
+            </section>
+        </main>
     );
 }
 

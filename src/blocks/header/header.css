@@ -2,7 +2,7 @@
 .header {
     max-width: 882px;
     margin: auto;
-    margin-top: 45px;
+    padding-top: 45px;
     border-bottom: 1px solid rgba(84, 84, 84, 0.7);
 }
 
