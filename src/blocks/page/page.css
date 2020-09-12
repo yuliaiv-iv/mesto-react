@@ -1,6 +1,5 @@
-#root {
-    max-width: 1280px;
-    min-width: 320px;
+.page {
+    overflow: auto;
     margin: 0 auto;
     font-family: 'Inter', Arial, sans-serif;
     background: #000;

@@ -24,7 +24,7 @@ function Card(props) {
                         aria-label="выразить положительную реакцию"
                         className="button button__like opacity">
                     </button>
-                    <dev className="card__like-counter">{props.card.likes.length}</dev>
+                    <div className="card__like-counter">{props.card.likes.length}</div>
                 </div>
             </div>
         </li>

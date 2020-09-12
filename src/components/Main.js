@@ -1,5 +1,5 @@
 import React from 'react';
-import { api } from '../utils/Api.js';
+import { api } from '../utils/api.js';
 import Card from './Card.js';
 
 function Main(props) {
@@ -9,21 +9,12 @@ function Main(props) {
     const [cards, setCards] = React.useState([]);
 
     React.useEffect(() => {
-        api.getUserData()
-            .then((item) => {
-                setUserAvatar(item.avatar);
-                setUserName(item.name);
-                setUserDescription(item.about);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    })
-
-    React.useEffect(() => {
-        api.getInitialCards()
-            .then((item) => {
-                setCards(item);
+        Promise.all([api.getUserData(), api.getInitialCards()])
+            .then(([result, data]) => {
+                setUserName(result.name);
+                setUserDescription(result.about);
+                setUserAvatar(result.avatar);
+                setCards(data);
             })
             .catch((err) => {
                 console.log(err);
@@ -33,7 +24,7 @@ function Main(props) {
     return (
         <main className="content">
             <section className="profile">
-                <dev className="profile__avatar">
+                <div className="profile__avatar">
                     <img
                         className="profile__image"
                         src={userAvatar}
@@ -47,7 +38,7 @@ function Main(props) {
                             aria-label="обновить фотографию пользователя">
                         </button>
                     </div>
-                </dev>
+                </div>
                 <div className="profile__info">
                     <h1 className="profile__name">{userName}</h1>
                     <button

@@ -32,6 +32,7 @@ function App() {
 
     return (
         <>
+            <div className="page">
             <Header />
             <div className="container">
                 <Main
@@ -55,7 +56,6 @@ function App() {
                             id="name-input"
                             className="popup__item popup__item_input-name"
                             name="name"
-                            // value=""
                             placeholder="Имя"
                             required
                             minLength="2" maxLength="40" />
@@ -67,7 +67,6 @@ function App() {
                             id="about-input"
                             className="popup__item popup__item_input-about"
                             name="about"
-                            //value=""
                             placeholder="О себе"
                             required
                             minLength="2" maxLength="200" />
@@ -88,7 +87,6 @@ function App() {
                             id="title-input"
                             className="popup__item popup__item_input-title"
                             name="name" 
-                            //value=""
                             placeholder="Название"
                             required
                             minLength="1" maxLength="30" />
@@ -100,7 +98,6 @@ function App() {
                             id="link-input"
                             className="popup__item popup__item_input-link"
                             name="link"
-                            //value=""
                             placeholder="Ссылка на картинку"
                             required />
                         <span id="link-input-error" className="popup__item-error"></span>
@@ -120,7 +117,6 @@ function App() {
                             id="link-input"
                             className="popup__item popup__item_input-avatar"
                             name="link"
-                            //value=""
                             placeholder="Ссылка на картинку"
                             required />
                         <span id="link-input-error" className="popup__item-error"></span>
@@ -139,6 +135,7 @@ function App() {
                     onClose={closeAllPopups}
                 >
                 </ImagePopup>
+            </div>
             </div>
         </>
     );
