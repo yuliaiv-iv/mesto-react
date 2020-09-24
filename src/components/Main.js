@@ -1,25 +1,14 @@
 import React from 'react';
-import { api } from '../utils/api.js';
+//import { api } from '../utils/api.js';
 import Card from './Card.js';
+import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 
 function Main(props) {
-    const [userAvatar, setUserAvatar] = React.useState();
-    const [userName, setUserName] = React.useState();
-    const [userDescription, setUserDescription] = React.useState();
-    const [cards, setCards] = React.useState([]);
-
-    React.useEffect(() => {
-        Promise.all([api.getUserData(), api.getInitialCards()])
-            .then(([result, data]) => {
-                setUserName(result.name);
-                setUserDescription(result.about);
-                setUserAvatar(result.avatar);
-                setCards(data);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    }, [])
+    //const [userAvatar, setUserAvatar] = React.useState();
+    //const [userName, setUserName] = React.useState();
+    //const [userDescription, setUserDescription] = React.useState();
+    //const [cards, setCards] = React.useState([]);
+    const currentUser = React.useContext(CurrentUserContext);
 
     return (
         <main className="content">
@@ -27,7 +16,7 @@ function Main(props) {
                 <div className="profile__avatar">
                     <img
                         className="profile__image"
-                        src={userAvatar}
+                        src={currentUser.avatar}
                         alt="Фотография профиля"
                     />
                     <div className="profile__cover">
@@ -40,14 +29,14 @@ function Main(props) {
                     </div>
                 </div>
                 <div className="profile__info">
-                    <h1 className="profile__name">{userName}</h1>
+                    <h1 className="profile__name">{currentUser.name}</h1>
                     <button
                         onClick={props.onEditProfile}
                         type="button"
                         aria-label="обновить информацию пользователя"
                         className="button profile__button-edit opacity">
                     </button>
-                    <p className="profile__about">{userDescription}</p>
+                    <p className="profile__about">{currentUser.about}</p>
                 </div>
                 <button
                     onClick={props.onAddPlace}
@@ -58,8 +47,10 @@ function Main(props) {
             </section>
             <section className="card-container">
                 <ul className="card-container__list">
-                    {cards.map(card => <Card {...card}
+                    {props.cards.map(card => <Card {...card}
                         onCardClick={props.onCardClick}
+                        onCardLike={props.onCardLike}
+                        onCardDelete={props.onCardDelete}
                         key={card._id}
                         card={card} />)}
                 </ul>

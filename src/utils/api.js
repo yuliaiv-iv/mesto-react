@@ -8,7 +8,7 @@ export class Api {
         if (res.ok) {
             return res.json()
         }
-        return Promise.reject(`Ð§Ñ‚Ð¾-Ñ‚Ð¾ Ð¿Ð¾ÑˆÐ»Ð¾ Ð½Ðµ Ñ‚Ð°Ðº: ${res.status}`);
+        return Promise.reject(`Что-то пошло не так: ${res.status}`);
     }
 
     getInitialCards() {
@@ -69,21 +69,21 @@ export class Api {
             .then(this._checkStatus);
     }
 
-    addLike(cardId) {
+    changeLikeStatus(cardId, like) {
         return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
-            method: 'PUT',
+            method: like ? 'PUT' : 'DELETE',
             headers: this._headers
         })
             .then(this._checkStatus);
     }
 
-    deleteLike(cardId) {
-        return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
-            method: 'DELETE',
-            headers: this._headers
-        })
-            .then(this._checkStatus);
-    }
+    // deleteLike(cardId) {
+    //     return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
+    //         method: 'DELETE',
+    //         headers: this._headers
+    //     })
+    //         .then(this._checkStatus);
+    // }
 }
 
 export const api = new Api({

@@ -13,6 +13,7 @@ function PopupWithForm(props) {
                 <h3 className="popup__title">{props.title}</h3>
                 <form
                     name={props.name}
+                    onSubmit={props.onSubmit}
                     className="popup__form"
                     action="#"
                     method="POST"
