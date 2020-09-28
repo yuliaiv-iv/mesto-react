@@ -1,12 +1,12 @@
 import React from 'react';
 import PopupWithForm from './PopupWithForm';
-//import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
+
 
 function ConfirmPopup(props) {
 
     function handleSubmit(event) {
         event.preventDefault();
-        props.onDelete()
+        props.onDelete(props.card)
 }
 
     return (
@@ -16,7 +16,8 @@ function ConfirmPopup(props) {
             button="Да"
             isOpen={props.isOpen}
             onClose={props.onClose}
-            onSubmit={handleSubmit}>
+            onSubmit={handleSubmit}
+            >
         </PopupWithForm>
     )
 }

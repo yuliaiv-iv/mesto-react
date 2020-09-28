@@ -1,7 +1,5 @@
 import React from 'react';
 import PopupWithForm from './PopupWithForm';
-//import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
-
 
 function EditAvatarPopup(props) {
     const avatarRef = React.useRef();
@@ -9,7 +7,7 @@ function EditAvatarPopup(props) {
     function handleSubmit(event) {
         event.preventDefault();
         props.onUpdateAvatar({
-            avatar: avatarRef.current.value,
+            link: avatarRef.current.value,
         });
     }
 
@@ -19,6 +17,7 @@ function EditAvatarPopup(props) {
             name="avatar"
             button="Сохранить"
             isOpen={props.isOpen}
+            onClick={props.onClick}
             onClose={props.onClose}
             onSubmit={handleSubmit}>
             <label className="popup__field">

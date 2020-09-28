@@ -1,13 +1,8 @@
 import React from 'react';
-//import { api } from '../utils/api.js';
 import Card from './Card.js';
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 
 function Main(props) {
-    //const [userAvatar, setUserAvatar] = React.useState();
-    //const [userName, setUserName] = React.useState();
-    //const [userDescription, setUserDescription] = React.useState();
-    //const [cards, setCards] = React.useState([]);
     const currentUser = React.useContext(CurrentUserContext);
 
     return (

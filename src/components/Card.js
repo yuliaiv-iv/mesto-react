@@ -6,10 +6,10 @@ function Card(props) {
     const isOwn = props.card.owner._id === currentUser._id;
     const isLiked = props.card.likes.some(like => like._id === currentUser._id);
     const cardDeleteButtonClassName = (
-        `button__delete ${isOwn ? 'button_visible button opacity' : ''}`
+        `button__delete button opacity ${isOwn ? 'button_visible' : ''}`
     );
     const cardLikeButtonClassName = (
-        `button__like ${isLiked ? 'button__like_active button opacity' : ''}`
+        `button__like button opacity ${isLiked ? 'button__like_active' : ''}`
     );
 
     function handleClick() {
@@ -27,7 +27,8 @@ function Card(props) {
             <img
                 className="card__image"
                 src={props.card.link} alt={props.card.name}
-                onClick={handleClick} />
+                onClick={handleClick} 
+                />
             <button
                 type="button"
                 aria-label="удалить элемент"
