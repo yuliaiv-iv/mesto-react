@@ -2,12 +2,12 @@ import React from 'react';
 import PopupWithForm from './PopupWithForm';
 
 function AddPlacePopup(props) {
-    const [inputValue, setInputValue] = React.useState({name: "", link: "",});
-    const [isValid, setIsValid] = React.useState({name: false, link: false});
-    const [validationMessage, setValidationMessage] = React.useState('');
+    const [inputValue, setInputValue] = React.useState({ name: '', link: '', });
+    const [isValid, setIsValid] = React.useState({ name: false, link: false });
+    const [validationMessage, setValidationMessage] = React.useState({ name: '', link: '' });
 
     function handleInputChange(event) {
-        const {name, value} = event.target;
+        const { name, value } = event.target;
         setInputValue({
             ...inputValue,
             [name]: value,
@@ -27,14 +27,14 @@ function AddPlacePopup(props) {
             name: inputValue.name,
             link: inputValue.link,
         });
-        setInputValue({name: "", link: ""})
+        setInputValue({ name: '', link: '' })
     }
-    const handleClose = () => {
+    function handleClose() {
         props.onClose();
-        setInputValue({name: "", link: ""})
-        setValidationMessage('')
+        setInputValue({ name: '', link: '' })
+        setValidationMessage({ name: '', link: '' })
     }
-    
+
     return (
         <PopupWithForm
             title="Новое место"
@@ -67,7 +67,7 @@ function AddPlacePopup(props) {
                     placeholder="Ссылка на картинку"
                     required
                     onChange={handleInputChange} />
-                <span id="link-input-error" className={!isValid.link ? 'popup__item-error' : ""}>{validationMessage.link}</span>
+                <span id="title-input-error" className={!isValid.link ? 'popup__item-error' : ""}>{validationMessage.link}</span>
             </label>
         </PopupWithForm>
     )

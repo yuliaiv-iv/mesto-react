@@ -2,7 +2,7 @@ import React from 'react';
 
 function ImagePopup(props) {
     return (
-        <section className={`popup popup_type_image ${props.card ? "popup_open" : ""}`}>
+        <section className={`popup popup_type_image ${props.isOpen ? "popup_open" : ""}`}>
             <figure className="popup__container popup__container_image">
                 <button
                     type="button"

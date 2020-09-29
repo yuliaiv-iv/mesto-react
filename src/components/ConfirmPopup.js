@@ -7,7 +7,7 @@ function ConfirmPopup(props) {
     function handleSubmit(event) {
         event.preventDefault();
         props.onDelete(props.card)
-}
+    }
 
     return (
         <PopupWithForm
@@ -17,7 +17,7 @@ function ConfirmPopup(props) {
             isOpen={props.isOpen}
             onClose={props.onClose}
             onSubmit={handleSubmit}
-            >
+        >
         </PopupWithForm>
     )
 }

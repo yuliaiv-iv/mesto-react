@@ -5,6 +5,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ### Содержание
 * Описание
 * Технологии
+* План доработки 
 * Figma
 
 ### Описание
@@ -21,6 +22,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 4.	Используются медиа-запросы для отображения сайта на устройствах с разным расширением.
 5.  JavaScript, API запросы, React
 
+### План доработки
 
+1. Сделать кнопки модалных окон не активными если поля невалидны
+2. Добавить функционал закрытия модалных окон по нажатию на esc and overlay 
 ### Figma 
 [Ссылка на макет в Figma](https://www.figma.com/file/StZjf8HnoeLdiXS7dYrLAh/JavaScript.-Sprint-4)

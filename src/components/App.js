@@ -39,6 +39,7 @@ function App() {
             setCards(newCards);
         });
     }
+
     function handleCardDelete(card) {
         api.deleteCard(card._id).then(() => {
             const newCards = cards.filter((c) => c._id !== card._id);
@@ -46,23 +47,29 @@ function App() {
             closeAllPopups()
         })
     }
+
     function handleDeleteClick(card) {
         setSelectedCard(card)
         setDeletePopupOpen(true);
     }
+
     function handleCardClick(card) {
         setSelectedCard(card);
         setIsImagePopupOpen(true);
     }
+
     function handleEditProfileClick() {
         setIsEditProfilePopupOpen(true);
     }
+
     function handleAddPlaceClick() {
         setIsAddPlacePopupOpen(true);
     }
+
     function handleEditAvatarClick() {
         setIsEditAvatarPopupOpen(true);
     }
+
     function closeAllPopups() {
         setIsEditProfilePopupOpen(false);
         setIsAddPlacePopupOpen(false);
@@ -71,6 +78,7 @@ function App() {
         setDeletePopupOpen(false);
         setSelectedCard();
     }
+
     function handleUpdateUser(data) {
         setIsLoading(true)
         api.setUserData(data)
@@ -85,6 +93,7 @@ function App() {
                 setIsLoading(false);
             });
     }
+
     function handleUpdateAvatar(data) {
         setIsLoading(true)
         api.setUserAvatarData(data)
@@ -103,16 +112,16 @@ function App() {
     function handleAddPlaceSubmit(card) {
         setIsLoading(true)
         api.postNewCard(card)
-        .then(result => {
-            setCards([result, ...cards]);
-            closeAllPopups();
-        })
-        .catch(err => {
-            console.log(err);
-        })
-        .finally(() => {
-            setIsLoading(false);
-        });
+            .then(result => {
+                setCards([result, ...cards]);
+                closeAllPopups();
+            })
+            .catch(err => {
+                console.log(err);
+            })
+            .finally(() => {
+                setIsLoading(false);
+            });
     }
     return (
         <>
@@ -127,7 +136,6 @@ function App() {
                             onEditAvatar={handleEditAvatarClick}
                             onCardClick={handleCardClick}
                             onCardLike={handleCardLike}
-                            //onCardDelete={handleCardDelete}
                             onCardDelete={handleDeleteClick}
                         />
                         <Footer />

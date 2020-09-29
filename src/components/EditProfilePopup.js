@@ -3,24 +3,21 @@ import PopupWithForm from './PopupWithForm';
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 
 function EditProfilePopup(props) {
-    
+
     const currentUser = React.useContext(CurrentUserContext);
-    const [isValid, setIsValid] = React.useState({name: false, link: false});
-    const [validationMessage, setValidationMessage] = React.useState('');
-    const [inputValue, setInputValue] = React.useState({
-        name: "", 
-        about: "",
-    });
+    const [isValid, setIsValid] = React.useState({ name: false, link: false });
+    const [validationMessage, setValidationMessage] = React.useState({ name: '', about: '', });
+    const [inputValue, setInputValue] = React.useState({ name: '', about: '' });
 
     React.useEffect(() => {
         setInputValue({
-            name: currentUser.name, 
-            about: currentUser.about
-        } || '');
+            name: currentUser.name || '',
+            about: currentUser.about || ''
+        });
     }, [currentUser]);
 
     function handleInputChange(event) {
-        const {name, value} = event.target;
+        const { name, value } = event.target;
         setInputValue({
             ...inputValue,
             [name]: value,
@@ -39,17 +36,18 @@ function EditProfilePopup(props) {
         event.preventDefault();
         props.onUpdateUser({
             name: inputValue.name,
-            about: inputValue.about,
+            about: inputValue.about
         });
+        setInputValue({ name: '', about: '' })
     }
 
-    const handleClose = () => {
+    function handleClose() {
         props.onClose();
         setInputValue({
-            name: currentUser.name, 
+            name: currentUser.name,
             about: currentUser.about
         })
-        setValidationMessage('')
+        setValidationMessage({ name: '', about: '', })
     }
 
     return (
@@ -60,6 +58,8 @@ function EditProfilePopup(props) {
             isOpen={props.isOpen}
             onClose={handleClose}
             onClick={props.onClick}
+            // isDisabled={!isValid.name}
+            // isDisabled={!isValid.about}
             onSubmit={handleSubmit}>
             <label className="popup__field">
                 <input

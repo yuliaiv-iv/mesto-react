@@ -27,8 +27,8 @@ function Card(props) {
             <img
                 className="card__image"
                 src={props.card.link} alt={props.card.name}
-                onClick={handleClick} 
-                />
+                onClick={handleClick}
+            />
             <button
                 type="button"
                 aria-label="удалить элемент"
