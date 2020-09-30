@@ -24,7 +24,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ### План доработки
 
-1. Сделать кнопки модалных окон не активными если поля невалидны
-2. Добавить функционал закрытия модалных окон по нажатию на esc and overlay 
+1. Добавить функционал закрытия модалных окон по нажатию на esc and overlay
+
 ### Figma 
 [Ссылка на макет в Figma](https://www.figma.com/file/StZjf8HnoeLdiXS7dYrLAh/JavaScript.-Sprint-4)
