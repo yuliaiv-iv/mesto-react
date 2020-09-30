@@ -32,12 +32,6 @@ function EditAvatarPopup(props, enabled) {
         setDisabled(enabled)
     }, [props.isOpen])
 
-    // function handleClose() {
-    //     props.onClose();
-    //     setValidationMessage('');
-    //     avatarRef.current.value = '';
-    // }
-
     return (
         <PopupWithForm
             title="Обновить аватар"
