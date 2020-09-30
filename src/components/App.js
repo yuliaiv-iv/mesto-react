@@ -16,7 +16,7 @@ function App() {
     const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
     const [isImagePopupOpen, setIsImagePopupOpen] = React.useState(false);
     const [isDeletePopupOpen, setDeletePopupOpen] = React.useState(false);
-    const [selectedCard, setSelectedCard] = React.useState('');
+    const [selectedCard, setSelectedCard] = React.useState(undefined);
     const [isloading, setIsLoading] = React.useState(false);
     const [currentUser, setCurrentUser] = React.useState({});
     const [cards, setCards] = React.useState([]);

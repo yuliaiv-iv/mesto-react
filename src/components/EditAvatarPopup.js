@@ -1,18 +1,21 @@
 import React from 'react';
 import PopupWithForm from './PopupWithForm';
 
-function EditAvatarPopup(props) {
+function EditAvatarPopup(props, enabled) {
     const avatarRef = React.useRef('');
     const [isValid, setIsValid] = React.useState(false);
     const [validationMessage, setValidationMessage] = React.useState('');
+    const [disabled, setDisabled] = React.useState(enabled);
 
     function handleChange(event) {
         if (!event.target.validity.valid) {
             setIsValid(true)
             setValidationMessage(event.target.validationMessage)
+            setDisabled(enabled)
         } else {
             setIsValid(false)
             setValidationMessage('')
+            setDisabled(!enabled)
         }
     };
 
@@ -21,14 +24,19 @@ function EditAvatarPopup(props) {
         props.onUpdateAvatar({
             link: avatarRef.current.value,
         });
-        avatarRef.current.value = '';
     }
 
-    function handleClose() {
-        props.onClose();
-        setValidationMessage('');
+    React.useEffect(() => {
         avatarRef.current.value = '';
-    }
+        setValidationMessage('');
+        setDisabled(enabled)
+    }, [props.isOpen])
+
+    // function handleClose() {
+    //     props.onClose();
+    //     setValidationMessage('');
+    //     avatarRef.current.value = '';
+    // }
 
     return (
         <PopupWithForm
@@ -37,7 +45,8 @@ function EditAvatarPopup(props) {
             button="Сохранить"
             isOpen={props.isOpen}
             onClick={props.onClick}
-            onClose={handleClose}
+            isDisabled={disabled}
+            onClose={props.onClose}
             onSubmit={handleSubmit}>
             <label className="popup__field">
                 <input

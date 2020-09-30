@@ -5,9 +5,10 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 function EditProfilePopup(props) {
 
     const currentUser = React.useContext(CurrentUserContext);
-    const [isValid, setIsValid] = React.useState({ name: false, link: false });
+    const [isValid, setIsValid] = React.useState({ name: true, about: true });
     const [validationMessage, setValidationMessage] = React.useState({ name: '', about: '', });
     const [inputValue, setInputValue] = React.useState({ name: '', about: '' });
+    const isFormValid = Object.values(isValid).every(Boolean);
 
     React.useEffect(() => {
         setInputValue({
@@ -38,17 +39,15 @@ function EditProfilePopup(props) {
             name: inputValue.name,
             about: inputValue.about
         });
-        setInputValue({ name: '', about: '' })
     }
 
-    function handleClose() {
-        props.onClose();
+    React.useEffect(() => {
         setInputValue({
-            name: currentUser.name,
-            about: currentUser.about
-        })
-        setValidationMessage({ name: '', about: '', })
-    }
+            name: currentUser.name || '',
+            about: currentUser.about || ''
+        });
+        setValidationMessage({ name: '', about: '', });
+    }, [props.isOpen])
 
     return (
         <PopupWithForm
@@ -56,10 +55,9 @@ function EditProfilePopup(props) {
             name="edit"
             button="Сохранить"
             isOpen={props.isOpen}
-            onClose={handleClose}
+            onClose={props.onClose}
             onClick={props.onClick}
-            // isDisabled={!isValid.name}
-            // isDisabled={!isValid.about}
+            isDisabled={!isFormValid}
             onSubmit={handleSubmit}>
             <label className="popup__field">
                 <input

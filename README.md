@@ -1,4 +1,4 @@
-# Проект 9: Место
+# Проект 11: Место на React
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

@@ -5,6 +5,7 @@ function AddPlacePopup(props) {
     const [inputValue, setInputValue] = React.useState({ name: '', link: '', });
     const [isValid, setIsValid] = React.useState({ name: false, link: false });
     const [validationMessage, setValidationMessage] = React.useState({ name: '', link: '' });
+    let isFormValid = Object.values(isValid).every(Boolean);
 
     function handleInputChange(event) {
         const { name, value } = event.target;
@@ -21,19 +22,20 @@ function AddPlacePopup(props) {
             [name]: event.target.validationMessage,
         })
     }
+
     function handleSubmit(event) {
         event.preventDefault();
         props.onAddPlace({
             name: inputValue.name,
             link: inputValue.link,
         });
-        setInputValue({ name: '', link: '' })
     }
-    function handleClose() {
-        props.onClose();
-        setInputValue({ name: '', link: '' })
-        setValidationMessage({ name: '', link: '' })
-    }
+
+    React.useEffect(() => {
+        setInputValue({ name: '', link: '' });
+        setValidationMessage({ name: '', link: '' });
+        setIsValid({ name: false, link: false });
+    }, [props.isOpen])
 
     return (
         <PopupWithForm
@@ -42,7 +44,8 @@ function AddPlacePopup(props) {
             button="Создать"
             isOpen={props.isOpen}
             onClick={props.onClick}
-            onClose={handleClose}
+            onClose={props.onClose}
+            isDisabled={!isFormValid}
             onSubmit={handleSubmit}>
             <label className="popup__field">
                 <input
