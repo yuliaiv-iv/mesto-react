@@ -1,6 +1,7 @@
 import React from 'react';
-import PopupWithForm from './PopupWithForm';
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
+import Popup from './Popup';
+import SubmitButton from './SubmitButton.js';
 
 function EditProfilePopup(props) {
 
@@ -47,45 +48,59 @@ function EditProfilePopup(props) {
             about: currentUser.about || ''
         });
         setValidationMessage({ name: '', about: '', });
-    }, [props.isOpen])
+    }, [currentUser.about, currentUser.name, props.isOpen])
 
     return (
-        <PopupWithForm
-            title="Редактировать профиль"
+        <Popup
             name="edit"
-            button="Сохранить"
+            classname="popup__container"
             isOpen={props.isOpen}
             onClose={props.onClose}
-            onClick={props.onClick}
-            isDisabled={!isFormValid}
-            onSubmit={handleSubmit}>
-            <label className="popup__field">
-                <input
-                    type="text"
-                    value={inputValue.name}
-                    onChange={handleInputChange}
-                    id="name-input"
-                    className="popup__item"
-                    name="name"
-                    placeholder="Имя"
-                    required
-                    minLength="2" maxLength="40" />
-                <span id="name-input-error" className={!isValid.name ? 'popup__item-error' : ""}>{validationMessage.name}</span>
-            </label>
-            <label className="popup__field">
-                <input
-                    type="text"
-                    value={inputValue.about}
-                    onChange={handleInputChange}
-                    id="about-input"
-                    className="popup__item"
-                    name="about"
-                    placeholder="О себе"
-                    required
-                    minLength="2" maxLength="200" />
-                <span id="name-input-error" className={!isValid.about ? 'popup__item-error' : ""}>{validationMessage.about}</span>
-            </label>
-        </PopupWithForm>
+        >
+            <h3 className="popup__title">Редактировать профиль</h3>
+            <form
+                onSubmit={handleSubmit}
+                className="popup__form"
+                action="#"
+                method="POST"
+                noValidate
+            >
+                <label className="popup__field">
+                    <input
+                        type="text"
+                        value={inputValue.name}
+                        onChange={handleInputChange}
+                        id="name-input"
+                        className="popup__item"
+                        name="name"
+                        placeholder="Имя"
+                        required
+                        minLength="2" maxLength="40"
+                    />
+                    <span id="name-input-error" className={!isValid.name ? 'popup__item-error' : ""}>{validationMessage.name}</span>
+                </label>
+                <label className="popup__field">
+                    <input
+                        type="text"
+                        value={inputValue.about}
+                        onChange={handleInputChange}
+                        id="about-input"
+                        className="popup__item"
+                        name="about"
+                        placeholder="О себе"
+                        required
+                        minLength="2" maxLength="200"
+                    />
+                    <span id="name-input-error" className={!isValid.about ? 'popup__item-error' : ""}>{validationMessage.about}</span>
+                </label>
+                <SubmitButton
+                    isDisabled={!isFormValid}
+                    button="Сохранить"
+                    onClick={props.onClick}
+                >
+                </SubmitButton>
+            </form>
+        </Popup>
     )
 }
 

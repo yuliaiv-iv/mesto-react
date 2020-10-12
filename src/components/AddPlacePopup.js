@@ -1,7 +1,9 @@
 import React from 'react';
-import PopupWithForm from './PopupWithForm';
+import Popup from './Popup';
+import SubmitButton from './SubmitButton.js';
 
 function AddPlacePopup(props) {
+
     const [inputValue, setInputValue] = React.useState({ name: '', link: '', });
     const [isValid, setIsValid] = React.useState({ name: false, link: false });
     const [validationMessage, setValidationMessage] = React.useState({ name: '', link: '' });
@@ -38,41 +40,55 @@ function AddPlacePopup(props) {
     }, [props.isOpen])
 
     return (
-        <PopupWithForm
-            title="Новое место"
-            name="add"
-            button="Создать"
+        <Popup
+            name="edit"
+            classname="popup__container"
             isOpen={props.isOpen}
-            onClick={props.onClick}
             onClose={props.onClose}
-            isDisabled={!isFormValid}
-            onSubmit={handleSubmit}>
-            <label className="popup__field">
-                <input
-                    type="text"
-                    value={inputValue.name}
-                    id="title-input"
-                    className="popup__item"
-                    name="name"
-                    placeholder="Название"
-                    required
-                    minLength="1" maxLength="30"
-                    onChange={handleInputChange} />
-                <span id="title-input-error" className={!isValid.name ? 'popup__item-error' : ""}>{validationMessage.name}</span>
-            </label>
-            <label className="popup__field">
-                <input
-                    type="url"
-                    value={inputValue.link}
-                    id="link-input"
-                    className="popup__item"
-                    name="link"
-                    placeholder="Ссылка на картинку"
-                    required
-                    onChange={handleInputChange} />
-                <span id="title-input-error" className={!isValid.link ? 'popup__item-error' : ""}>{validationMessage.link}</span>
-            </label>
-        </PopupWithForm>
+        >
+            <h3 className="popup__title">Новое место</h3>
+            <form
+                onSubmit={handleSubmit}
+                className="popup__form"
+                action="#"
+                method="POST"
+                noValidate
+            >
+                <label className="popup__field">
+                    <input
+                        type="text"
+                        value={inputValue.name}
+                        id="title-input"
+                        className="popup__item"
+                        name="name"
+                        placeholder="Название"
+                        required
+                        minLength="1" maxLength="30"
+                        onChange={handleInputChange}
+                    />
+                    <span id="title-input-error" className={!isValid.name ? 'popup__item-error' : ""}>{validationMessage.name}</span>
+                </label>
+                <label className="popup__field">
+                    <input
+                        type="url"
+                        value={inputValue.link}
+                        id="link-input"
+                        className="popup__item"
+                        name="link"
+                        placeholder="Ссылка на картинку"
+                        required
+                        onChange={handleInputChange}
+                    />
+                    <span id="title-input-error" className={!isValid.link ? 'popup__item-error' : ""}>{validationMessage.link}</span>
+                </label>
+                <SubmitButton
+                    isDisabled={!isFormValid}
+                    button="Создать"
+                    onClick={props.onClick}
+                >
+                </SubmitButton>
+            </form>
+        </Popup>
     )
 }
 

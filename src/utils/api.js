@@ -76,14 +76,6 @@ export class Api {
         })
             .then(this._checkStatus);
     }
-
-    // deleteLike(cardId) {
-    //     return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
-    //         method: 'DELETE',
-    //         headers: this._headers
-    //     })
-    //         .then(this._checkStatus);
-    // }
 }
 
 export const api = new Api({

@@ -1,5 +1,6 @@
 import React from 'react';
-import PopupWithForm from './PopupWithForm';
+import Popup from './Popup';
+import SubmitButton from './SubmitButton.js';
 
 
 function ConfirmPopup(props) {
@@ -10,15 +11,25 @@ function ConfirmPopup(props) {
     }
 
     return (
-        <PopupWithForm
-            title="Вы уверены?"
+        <Popup
             name="delete"
-            button="Да"
+            classname="popup__container"
             isOpen={props.isOpen}
             onClose={props.onClose}
-            onSubmit={handleSubmit}
         >
-        </PopupWithForm>
+            <h3 className="popup__title">Вы уверены?</h3>
+            <form
+                onSubmit={handleSubmit}
+                className="popup__form"
+                action="#"
+                method="POST"
+                noValidate>
+                <SubmitButton
+                    button="Да"
+                >
+                </SubmitButton>
+            </form>
+        </Popup>
     )
 }
 

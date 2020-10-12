@@ -2,9 +2,10 @@ import React from 'react';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function Card(props) {
+    const { card, } = props;
     const currentUser = React.useContext(CurrentUserContext);
-    const isOwn = props.card.owner._id === currentUser._id;
-    const isLiked = props.card.likes.some(like => like._id === currentUser._id);
+    const isOwn = card.owner._id === currentUser._id;
+    const isLiked = card.likes.some(like => like._id === currentUser._id);
     const cardDeleteButtonClassName = (
         `button__delete button opacity ${isOwn ? 'button_visible' : ''}`
     );
@@ -13,20 +14,20 @@ function Card(props) {
     );
 
     function handleClick() {
-        props.onCardClick(props.card);
+        props.onCardClick(card);
     }
     function handleLikeClick() {
-        props.onCardLike(props.card)
+        props.onCardLike(card)
     }
     function handleDeleteClick() {
-        props.onCardDelete(props.card)
+        props.onCardDelete(card)
     }
 
     return (
         <li className="card">
             <img
                 className="card__image"
-                src={props.card.link} alt={props.card.name}
+                src={card.link} alt={card.name}
                 onClick={handleClick}
             />
             <button
@@ -36,7 +37,7 @@ function Card(props) {
                 onClick={handleDeleteClick}>
             </button>
             <div className="card__info">
-                <h3 className="card__title" >{props.card.name}</h3>
+                <h3 className="card__title" >{card.name}</h3>
                 <div className="card__like">
                     <button
                         type="button"
@@ -44,7 +45,7 @@ function Card(props) {
                         className={cardLikeButtonClassName}
                         onClick={handleLikeClick}>
                     </button>
-                    <div className="card__like-counter">{props.card.likes.length}</div>
+                    <div className="card__like-counter">{card.likes.length}</div>
                 </div>
             </div>
         </li>

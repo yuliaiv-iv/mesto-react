@@ -1,21 +1,22 @@
 import React from 'react';
-import PopupWithForm from './PopupWithForm';
+import Popup from './Popup';
+import SubmitButton from './SubmitButton.js';
 
-function EditAvatarPopup(props, enabled) {
+function EditAvatarPopup(props) {
     const avatarRef = React.useRef('');
     const [isValid, setIsValid] = React.useState(false);
     const [validationMessage, setValidationMessage] = React.useState('');
-    const [disabled, setDisabled] = React.useState(enabled);
+    const [isFormValid, setFormValid] = React.useState(false);
 
     function handleChange(event) {
         if (!event.target.validity.valid) {
             setIsValid(true)
             setValidationMessage(event.target.validationMessage)
-            setDisabled(enabled)
+            setFormValid();
         } else {
             setIsValid(false)
             setValidationMessage('')
-            setDisabled(!enabled)
+            setFormValid(true);
         }
     };
 
@@ -29,33 +30,46 @@ function EditAvatarPopup(props, enabled) {
     React.useEffect(() => {
         avatarRef.current.value = '';
         setValidationMessage('');
-        setDisabled(enabled)
+        setFormValid();
     }, [props.isOpen])
 
     return (
-        <PopupWithForm
-            title="Обновить аватар"
+        <Popup
             name="avatar"
-            button="Сохранить"
+            classname="popup__container"
             isOpen={props.isOpen}
-            onClick={props.onClick}
-            isDisabled={disabled}
             onClose={props.onClose}
-            onSubmit={handleSubmit}>
-            <label className="popup__field">
-                <input
-                    ref={avatarRef}
-                    type="url"
-                    onChange={handleChange}
-                    id="link-input"
-                    className="popup__item"
-                    name="link"
-                    placeholder="Ссылка на картинку"
-                    required />
-                <span id="link-input-error" className={isValid ? 'popup__item-error' : ""}>{validationMessage}</span>
-            </label>
-        </PopupWithForm>
+        >
+            <h3 className="popup__title">Обновить аватар</h3>
+            <form
+                onSubmit={handleSubmit}
+                className="popup__form"
+                action="#"
+                method="POST"
+                noValidate
+            >
+                <label className="popup__field">
+                    <input
+                        ref={avatarRef}
+                        type="url"
+                        onChange={handleChange}
+                        id="link-input"
+                        className="popup__item"
+                        name="link"
+                        placeholder="Ссылка на картинку"
+                        required />
+                    <span id="link-input-error" className={isValid ? 'popup__item-error' : ""}>{validationMessage}</span>
+                </label>
+                <SubmitButton
+                    isDisabled={!isFormValid}
+                    button="Сохранить"
+                    onClick={props.onClick}
+                >
+                </SubmitButton>
+            </form>
+        </Popup>
     )
 }
 
 export default EditAvatarPopup;
+

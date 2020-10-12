@@ -3,6 +3,7 @@ import Card from './Card.js';
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 
 function Main(props) {
+    const { onEditAvatar, onEditProfile, onAddPlace, onCardClick, onCardLike, onCardDelete} = props;
     const currentUser = React.useContext(CurrentUserContext);
 
     return (
@@ -16,7 +17,7 @@ function Main(props) {
                     />
                     <div className="profile__cover">
                         <button
-                            onClick={props.onEditAvatar}
+                            onClick={onEditAvatar}
                             type="button"
                             className="button profile__button-avatar"
                             aria-label="обновить фотографию пользователя">
@@ -26,7 +27,7 @@ function Main(props) {
                 <div className="profile__info">
                     <h1 className="profile__name">{currentUser.name}</h1>
                     <button
-                        onClick={props.onEditProfile}
+                        onClick={onEditProfile}
                         type="button"
                         aria-label="обновить информацию пользователя"
                         className="button profile__button-edit opacity">
@@ -34,7 +35,7 @@ function Main(props) {
                     <p className="profile__about">{currentUser.about}</p>
                 </div>
                 <button
-                    onClick={props.onAddPlace}
+                    onClick={onAddPlace}
                     type="button"
                     aria-label="добавить новую карточку"
                     className="button profile__button-add opacity">
@@ -43,9 +44,9 @@ function Main(props) {
             <section className="card-container">
                 <ul className="card-container__list">
                     {props.cards.map(card => <Card {...card}
-                        onCardClick={props.onCardClick}
-                        onCardLike={props.onCardLike}
-                        onCardDelete={props.onCardDelete}
+                        onCardClick={onCardClick}
+                        onCardLike={onCardLike}
+                        onCardDelete={onCardDelete}
                         key={card._id}
                         card={card} />)}
                 </ul>
