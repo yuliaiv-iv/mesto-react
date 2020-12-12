@@ -1,29 +1,29 @@
 import React, { useEffect } from 'react';
 
-function Popup(props) {
+function Popup({onClose, isOpen, name, classname, children}) {
     
     function handleEsc(event) {
         if(event.key !== 'Escape') {
             return
         }
-        props.onClose();
+        onClose();
     }
 
     useEffect(() => {
         document.addEventListener('keydown', handleEsc);
         return () => document.removeEventListener('keydown', handleEsc);
-    }, [props.isOpen]);
+    }, [isOpen]);
 
     return (
-        <section className={`popup popup_type_${props.name} ${props.isOpen ? "popup_open" : ""}`}>
-            <div className={props.classname}>
+        <section className={`popup popup_type_${name} ${isOpen ? "popup_open" : ""}`}>
+            <div className={classname}>
                 <button
                     type="button"
                     aria-label="закрыть модальное окно"
                     className="button popup__close opacity"
-                    onClick={props.onClose}>
+                    onClick={onClose}>
                 </button>
-                {props.children}
+                {children}
             </div>
         </section>
     )

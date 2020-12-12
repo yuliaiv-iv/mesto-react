@@ -2,7 +2,7 @@ import React from 'react';
 import Popup from './Popup';
 import SubmitButton from './SubmitButton.js';
 
-function EditAvatarPopup(props) {
+function EditAvatarPopup({ onUpdateAvatar, isOpen, onClose, onClick }) {
     const avatarRef = React.useRef('');
     const [isValid, setIsValid] = React.useState(false);
     const [validationMessage, setValidationMessage] = React.useState('');
@@ -22,7 +22,7 @@ function EditAvatarPopup(props) {
 
     function handleSubmit(event) {
         event.preventDefault();
-        props.onUpdateAvatar({
+        onUpdateAvatar({
             link: avatarRef.current.value,
         });
     }
@@ -31,14 +31,14 @@ function EditAvatarPopup(props) {
         avatarRef.current.value = '';
         setValidationMessage('');
         setFormValid();
-    }, [props.isOpen])
+    }, [isOpen])
 
     return (
         <Popup
             name="avatar"
             classname="popup__container"
-            isOpen={props.isOpen}
-            onClose={props.onClose}
+            isOpen={isOpen}
+            onClose={onClose}
         >
             <h3 className="popup__title">Обновить аватар</h3>
             <form
@@ -63,7 +63,7 @@ function EditAvatarPopup(props) {
                 <SubmitButton
                     isDisabled={!isFormValid}
                     button="Сохранить"
-                    onClick={props.onClick}
+                    onClick={onClick}
                 >
                 </SubmitButton>
             </form>

@@ -2,7 +2,7 @@ import React from 'react';
 import Popup from './Popup';
 import SubmitButton from './SubmitButton.js';
 
-function AddPlacePopup(props) {
+function AddPlacePopup({isOpen, onAddPlace, onClose, onClick}) {
 
     const [inputValue, setInputValue] = React.useState({ name: '', link: '', });
     const [isValid, setIsValid] = React.useState({ name: false, link: false });
@@ -27,7 +27,7 @@ function AddPlacePopup(props) {
 
     function handleSubmit(event) {
         event.preventDefault();
-        props.onAddPlace({
+        onAddPlace({
             name: inputValue.name,
             link: inputValue.link,
         });
@@ -37,14 +37,14 @@ function AddPlacePopup(props) {
         setInputValue({ name: '', link: '' });
         setValidationMessage({ name: '', link: '' });
         setIsValid({ name: false, link: false });
-    }, [props.isOpen])
+    }, [isOpen])
 
     return (
         <Popup
             name="edit"
             classname="popup__container"
-            isOpen={props.isOpen}
-            onClose={props.onClose}
+            isOpen={isOpen}
+            onClose={onClose}
         >
             <h3 className="popup__title">Новое место</h3>
             <form
@@ -84,7 +84,7 @@ function AddPlacePopup(props) {
                 <SubmitButton
                     isDisabled={!isFormValid}
                     button="Создать"
-                    onClick={props.onClick}
+                    onClick={onClick}
                 >
                 </SubmitButton>
             </form>

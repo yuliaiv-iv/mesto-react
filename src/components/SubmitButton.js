@@ -1,14 +1,14 @@
 import React from 'react';
 
-function SubmitButton(props) {
+function SubmitButton({isDisabled, onClick, button}) {
 
     return (
         <button
             type="submit"
-            className={`button popup__button-submit ${props.isDisabled ? 'popup__button-submit_disabled' : ''}`}
-            disabled={props.isDisabled}
+            className={`button popup__button-submit ${isDisabled ? 'popup__button-submit_disabled' : ''}`}
+            disabled={isDisabled}
         >
-            {props.onClick ? "Сохранение..." : props.button}
+            {onClick ? "Сохранение..." : button}
         </button>
     )
 }

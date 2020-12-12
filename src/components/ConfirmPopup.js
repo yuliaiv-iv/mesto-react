@@ -3,19 +3,19 @@ import Popup from './Popup';
 import SubmitButton from './SubmitButton.js';
 
 
-function ConfirmPopup(props) {
+function ConfirmPopup({ card, onDelete, isOpen, onClose }) {
 
     function handleSubmit(event) {
         event.preventDefault();
-        props.onDelete(props.card)
+        onDelete(card)
     }
 
     return (
         <Popup
             name="delete"
             classname="popup__container"
-            isOpen={props.isOpen}
-            onClose={props.onClose}
+            isOpen={isOpen}
+            onClose={onClose}
         >
             <h3 className="popup__title">Вы уверены?</h3>
             <form

@@ -3,7 +3,7 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 import Popup from './Popup';
 import SubmitButton from './SubmitButton.js';
 
-function EditProfilePopup(props) {
+function EditProfilePopup({ onUpdateUser, isOpen, onClose, onClick }) {
 
     const currentUser = React.useContext(CurrentUserContext);
     const [isValid, setIsValid] = React.useState({ name: true, about: true });
@@ -36,7 +36,7 @@ function EditProfilePopup(props) {
 
     function handleSubmit(event) {
         event.preventDefault();
-        props.onUpdateUser({
+        onUpdateUser({
             name: inputValue.name,
             about: inputValue.about
         });
@@ -48,14 +48,14 @@ function EditProfilePopup(props) {
             about: currentUser.about || ''
         });
         setValidationMessage({ name: '', about: '', });
-    }, [currentUser.about, currentUser.name, props.isOpen])
+    }, [currentUser.about, currentUser.name, isOpen])
 
     return (
         <Popup
             name="edit"
             classname="popup__container"
-            isOpen={props.isOpen}
-            onClose={props.onClose}
+            isOpen={isOpen}
+            onClose={onClose}
         >
             <h3 className="popup__title">Редактировать профиль</h3>
             <form
@@ -96,7 +96,7 @@ function EditProfilePopup(props) {
                 <SubmitButton
                     isDisabled={!isFormValid}
                     button="Сохранить"
-                    onClick={props.onClick}
+                    onClick={onClick}
                 >
                 </SubmitButton>
             </form>

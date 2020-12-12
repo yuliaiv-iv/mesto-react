@@ -2,7 +2,7 @@ import React from 'react';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function Card(props) {
-    const { card, } = props;
+    const { card, onCardClick, onCardLike, onCardDelete } = props;
     const currentUser = React.useContext(CurrentUserContext);
     const isOwn = card.owner._id === currentUser._id;
     const isLiked = card.likes.some(like => like._id === currentUser._id);
@@ -14,13 +14,13 @@ function Card(props) {
     );
 
     function handleClick() {
-        props.onCardClick(card);
+        onCardClick(card);
     }
     function handleLikeClick() {
-        props.onCardLike(card)
+        onCardLike(card)
     }
     function handleDeleteClick() {
-        props.onCardDelete(card)
+        onCardDelete(card)
     }
 
     return (
