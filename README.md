@@ -1,6 +1,6 @@
 # Mesto
 Учебный проект **Место на React** по профессии Веб-разработчик. Опубликованный проект подключен к **`серверу`** 
-и можно посмотреть **`[здесь](https://yuliaiv-iv.github.io/mesto-react)`**
+и можно посмотреть **[здесь](https://yuliaiv-iv.github.io/mesto-react)**
 
 ### Описание
 
@@ -23,10 +23,7 @@
 ### Figma 
 **[Ссылка](https://www.figma.com/file/StZjf8HnoeLdiXS7dYrLAh/JavaScript.-Sprint-4)** на макет в Figma
 
-<div>
-<a href="https://yuliaiv-iv.github.io/mesto-react" target="_blank">
-  <img align="left" src="./images/readme_main.jpg" alt="Место" />
-</a>
-<a href="https://yuliaiv-iv.github.io/mesto-react" target="_blank">
-  <img align="right" src="./images/readme_form.jpg" alt="Место" />
-</a>
+<div align="center">
+    <img src="./src/images/readme_main.jpg" alt="Место" width="400"/>
+    <img src="./src/images/readme_form.jpg" alt="Место" width="400"/>
+</div>
