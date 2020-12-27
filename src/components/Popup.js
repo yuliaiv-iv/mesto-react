@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 
-function Popup({onClose, isOpen, name, classname, children}) {
-    
+function Popup({ onClose, isOpen, name, classname, children }) {
+
     function handleEsc(event) {
-        if(event.key !== 'Escape') {
+        if (event.key !== 'Escape') {
             return
         }
         onClose();
@@ -14,8 +14,17 @@ function Popup({onClose, isOpen, name, classname, children}) {
         return () => document.removeEventListener('keydown', handleEsc);
     }, [isOpen]);
 
+    function handleOverlayClose(event) {
+        if (event.target === event.currentTarget && isOpen) {
+            onClose();
+        }
+    }
+
     return (
-        <section className={`popup popup_type_${name} ${isOpen ? "popup_open" : ""}`}>
+        <section
+            onMouseUp={handleOverlayClose}
+            className={`popup popup_type_${name} ${isOpen ? "popup_open" : ""}`}
+        >
             <div className={classname}>
                 <button
                     type="button"
